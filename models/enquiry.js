@@ -1,19 +1,27 @@
 import mongoose from "mongoose";
 
-const userEnquirySchema = new mongoose.Schema({
+const EnquirySchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      default: "",
     },
     email: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      default: "",
+      required: true // ✅ NEW
     },
     comment: {
-        type: String,
-        required: true,
+      type: String,
+      required: true, // query
     },
-}, { timestamps: true });   
-const UserEnquiry = mongoose.model("UserEnquiry", userEnquirySchema);
+  },
+  { timestamps: true }
+);
 
-export default UserEnquiry;
+const Enquiry1 = mongoose.model("Enquiry1", EnquirySchema);
+export default Enquiry1;

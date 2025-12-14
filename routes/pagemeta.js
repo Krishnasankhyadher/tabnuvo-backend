@@ -37,6 +37,16 @@ pagerouter.post("/", async (req, res) => {
     res.json(m);
   } catch (e) { res.status(400).json({ error: e.message }); }
 });
+pagerouter.get("/count", async (req, res) => {
+  
+  try {
+    const count = await PageMeta.countDocuments();
+    res.json({ count });
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to count static pages" });
+  }
+});
+
 
 // update
 pagerouter.put("/:id", async (req, res) => {
@@ -52,5 +62,8 @@ pagerouter.delete("/:id", async (req, res) => {
   try { await PageMeta.findByIdAndDelete(req.params.id); res.json({ success: true }); }
   catch (e) { res.status(500).json({ error: e.message }); }
 });
+
+
+
 
 export default pagerouter;
