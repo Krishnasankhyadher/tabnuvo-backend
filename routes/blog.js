@@ -5,6 +5,8 @@ import {
   getBlogById,
   updateBlog,
   deleteBlog,
+  getBlogBySlug,
+ 
 } from "../controllers/blogController.js";
 import { upload } from "../middleware/cloudinaryUpload.js";
 import Bloger from "../models/bloger.js";
@@ -19,6 +21,8 @@ blogRouter.get("/blogs", getBlogs);
 
 // READ SINGLE BLOG
 blogRouter.get("/blogs/:id", getBlogById);
+blogRouter.get("/blogs/slug/:slug",getBlogBySlug);
+
 
 // UPDATE BLOG
 blogRouter.put("/blogs/:id", upload.single("mainImage"), updateBlog);
