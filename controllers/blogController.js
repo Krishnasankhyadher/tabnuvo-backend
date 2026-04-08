@@ -36,9 +36,9 @@ export const createBlog = async (req, res) => {
 
       mainImage: req.file
         ? {
-            url: req.file.path,
-            public_id: req.file.filename,
-          }
+          url: req.file.path,
+          public_id: req.file.filename,
+        }
         : null,
     });
 
@@ -61,9 +61,13 @@ export const getBlogs = async (req, res) => {
 
 /* READ ONE */
 export const getBlogById = async (req, res) => {
-  const blog = await Bloger.findById(req.params.id);
-  if (!blog) return res.status(404).json({ msg: "Blog not found" });
-  res.json(blog);
+  try {
+    const blog = await Bloger.findById(req.params.id);
+    if (!blog) return res.status(404).json({ msg: "Blog not found" });
+    res.json(blog);
+  } catch (err) {
+    res.status(400).json({ msg: "Invalid blog ID" });
+  }
 };
 
 /* UPDATE */
@@ -98,9 +102,9 @@ export const updateBlog = async (req, res) => {
 
         mainImage: req.file
           ? {
-              url: req.file.path,
-              public_id: req.file.filename,
-            }
+            url: req.file.path,
+            public_id: req.file.filename,
+          }
           : blog.mainImage,
       },
       { new: true }
