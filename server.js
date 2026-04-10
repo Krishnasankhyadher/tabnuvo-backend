@@ -26,7 +26,9 @@ app.use(helmet());
 
 const allowedOrigins = [
   "https://tabnuvo.in",
+  "https://tabnuvo.com",
   "https://www.tabnuvo.in",
+  "https://www.tabnuvo.com",
   "http://localhost:5173",
 ];
 
